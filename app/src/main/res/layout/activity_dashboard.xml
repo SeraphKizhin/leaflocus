@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="20dp">
+
+    <LinearLayout
+        android:layout_width="350dp"
+        android:layout_height="50dp"
+        android:background="#E6607076">
+
+        <TextView
+            android:id="@+id/textviewWelcome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:padding="10dp"
+            android:text="@+id/textviewWelcome" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="200dp"
+            android:layout_height="1000dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="5dp"
+            android:background="#D7EBEFF1">
+
+            <TextView
+                android:id="@+id/textviewProfile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Go to Profile"
+                android:layout_marginLeft="50dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:layout_marginTop="20dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="145dp"
+            android:layout_height="400dp"
+            android:layout_marginTop="5dp"
+            android:background="#D7EBEFF1">
+
+            <TextView
+                android:id="@+id/textviewLogoutLink"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Logout"
+                android:layout_marginLeft="50dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:layout_marginTop="10dp" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+
+
+</LinearLayout>
