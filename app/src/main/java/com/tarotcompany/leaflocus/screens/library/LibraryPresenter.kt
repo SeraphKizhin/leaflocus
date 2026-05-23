@@ -1,5 +1,7 @@
 package com.tarotcompany.leaflocus.screens.library
 
+import com.tarotcompany.leaflocus.data.AchievementDao
+import com.tarotcompany.leaflocus.data.AchievementManager
 import com.tarotcompany.leaflocus.data.PlantDao
 import com.tarotcompany.leaflocus.data.PlantType
 import com.tarotcompany.leaflocus.data.UserPlant
@@ -10,7 +12,8 @@ import kotlinx.coroutines.withContext
 
 class LibraryPresenter(
     private var view: LibraryContract.View?,
-    private val plantDao: PlantDao
+    private val plantDao: PlantDao,
+    private val achievementDao: AchievementDao
 ) : LibraryContract.Presenter {
 
     private val scope = CoroutineScope(Dispatchers.Main)
@@ -24,19 +27,38 @@ class LibraryPresenter(
 
     override fun addPlantToUser(userId: Int, plant: PlantType) {
         scope.launch {
-            // Create a new tracking entry for this user
             val newTrackedPlant = UserPlant(
                 userId = userId,
                 plantTypeId = plant.id,
-                customNickname = plant.name, // Default to the species name
+                customNickname = plant.name,
                 dateAdded = System.currentTimeMillis(),
                 lastWatered = System.currentTimeMillis()
             )
 
             withContext(Dispatchers.IO) {
+                // 1. Add the plant
                 plantDao.addPlantToUserCollection(newTrackedPlant)
+
+                // 2. Now get the updated count (inside IO thread)
+                val count = plantDao.getPlantCount(userId)
+
+                // 3. Check for milestones
+                val title = when (count) {
+                    1 -> "First Sprout"
+                    5 -> "Small Garden"
+                    10 -> "Green Thumb"
+                    20 -> "Plant Collector"
+                    50 -> "Botanical Master"
+                    else -> null
+                }
+
+                // 4. Award achievement if title exists
+                title?.let {
+                    AchievementManager.checkAndAward(userId, it, "You reached $count plants!", achievementDao)
+                }
             }
 
+            // Back on Main Thread: UI Update
             view?.showMessage("${plant.name} added to your collection!")
         }
     }

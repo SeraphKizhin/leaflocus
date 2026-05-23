@@ -1,5 +1,7 @@
 package com.tarotcompany.leaflocus.screens.dashboard
 
+import com.tarotcompany.leaflocus.data.AchievementDao
+import com.tarotcompany.leaflocus.data.AchievementManager
 import com.tarotcompany.leaflocus.data.PlantDao
 import com.tarotcompany.leaflocus.data.UserDao
 import kotlinx.coroutines.CoroutineScope
@@ -10,7 +12,8 @@ import kotlinx.coroutines.withContext
 class DashboardPresenter(
     private var view: DashboardContract.View?,
     private val userDao: UserDao,
-    private val plantDao: PlantDao
+    private val plantDao: PlantDao,
+    private val achievementDao: AchievementDao
 ) : DashboardContract.Presenter {
 
     private val scope = CoroutineScope(Dispatchers.Main)
@@ -39,7 +42,15 @@ class DashboardPresenter(
     override fun waterPlant(plantId: Int) {
         scope.launch {
             val currentTime = System.currentTimeMillis()
-            withContext(Dispatchers.IO) { plantDao.updateWateringTime(plantId, currentTime) }
+            withContext(Dispatchers.IO) {
+                plantDao.updateWateringTime(plantId, currentTime)
+
+                val existing = achievementDao.getAchievementsForUser(currentUserId)
+                if (existing.none { it.title == "First Hydration" }) {
+                    AchievementManager.checkAndAward(
+                        currentUserId, "First Hydration", "Watered your plant for the first time!", achievementDao)
+                }
+            }
             // Reload the list to show the updated time
             loadDashboardData()
         }

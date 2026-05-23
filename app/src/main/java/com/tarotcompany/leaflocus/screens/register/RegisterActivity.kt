@@ -21,9 +21,12 @@ class RegisterActivity : AppCompatActivity(), RegisterContract.View {
         setContentView(R.layout.activity_register)
 
         val database = AppDatabase.getDatabase(applicationContext)
+        presenter = RegisterPresenter(
+            this,
+            database.userDao(),
+            database.achievementDao() // Add this here
+        )
         val userDao = database.userDao()
-
-        presenter = RegisterPresenter(this, userDao)
 
         val edittextUsername = findViewById<EditText>(R.id.edittextUsername)
         val edittextEmail = findViewById<EditText>(R.id.edittextEmail)

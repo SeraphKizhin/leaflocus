@@ -25,7 +25,12 @@ class DashboardActivity : AppCompatActivity(), DashboardContract.View {
         setContentView(R.layout.activity_dashboard)
 
         val database = AppDatabase.getDatabase(applicationContext)
-        presenter = DashboardPresenter(this, database.userDao(), database.plantDao())
+        presenter = DashboardPresenter(
+            this,
+            database.userDao(),
+            database.plantDao(),
+            database.achievementDao()
+        )
 
         // Setup RecyclerView
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerViewMyPlants)

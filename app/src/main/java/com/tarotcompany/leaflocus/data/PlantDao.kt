@@ -32,4 +32,7 @@ interface PlantDao {
 
     @Query("SELECT * FROM user_plants WHERE userId = :userId AND isShowcased = 1")
     suspend fun getShowcasedPlants(userId: Int): List<UserPlant>
+
+    @Query("SELECT COUNT(*) FROM user_plants WHERE userId = :userId")
+    suspend fun getPlantCount(userId: Int): Int
 }

@@ -25,7 +25,11 @@ class LibraryActivity : AppCompatActivity(), LibraryContract.View {
         currentUserId = intent.getIntExtra("USER_ID", -1)
 
         val database = AppDatabase.getDatabase(applicationContext)
-        presenter = LibraryPresenter(this, database.plantDao())
+        presenter = LibraryPresenter(
+            this,
+            database.plantDao(),
+            database.achievementDao()
+        )
 
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerViewPlants)
         recyclerView.layoutManager = LinearLayoutManager(this)
