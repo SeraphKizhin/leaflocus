@@ -36,13 +36,10 @@ class LibraryPresenter(
             )
 
             withContext(Dispatchers.IO) {
-                // 1. Add the plant
                 plantDao.addPlantToUserCollection(newTrackedPlant)
 
-                // 2. Now get the updated count (inside IO thread)
                 val count = plantDao.getPlantCount(userId)
 
-                // 3. Check for milestones
                 val title = when (count) {
                     1 -> "First Sprout"
                     5 -> "Small Garden"
@@ -52,13 +49,10 @@ class LibraryPresenter(
                     else -> null
                 }
 
-                // 4. Award achievement if title exists
                 title?.let {
                     AchievementManager.checkAndAward(userId, it, "You reached $count plants!", achievementDao)
                 }
             }
-
-            // Back on Main Thread: UI Update
             view?.showMessage("${plant.name} added to your collection!")
         }
     }

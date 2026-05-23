@@ -19,11 +19,9 @@ class ProfilePresenter(
         scope.launch(Dispatchers.IO) {
             val user = userDao.getUserByUsername(username)
             if (user != null) {
-                // Fetch all data sources
                 val showcased = plantDao.getShowcasedPlants(user.id)
                 val achievements = achievementDao.getAchievementsForUser(user.id)
 
-                // Switch back to Main thread to update the UI
                 withContext(Dispatchers.Main) {
                     view?.showProfile(user, showcased, achievements)
                 }

@@ -10,20 +10,21 @@ import androidx.room.RoomDatabase
         User::class,
         PlantType::class,
         UserPlant::class,
-        Achievement::class // Ensure Achievement is here
+        Achievement::class,
+        Friendship::class
     ],
-    version = 3 // Bumped from 2 to 3
+    version = 5
 )
 abstract class AppDatabase : RoomDatabase() {
     abstract fun userDao(): UserDao
     abstract fun plantDao(): PlantDao
     abstract fun achievementDao(): AchievementDao
+    abstract fun friendDao(): FriendDao
 
     companion object {
         @Volatile
         private var INSTANCE: AppDatabase? = null
 
-        // 1. Moved the list inside the companion object
         val initialPlants = listOf(
             PlantType(
                 name = "Dragonfruit (Pitaya)",
@@ -64,7 +65,7 @@ abstract class AppDatabase : RoomDatabase() {
                     AppDatabase::class.java,
                     "leaflocus_database"
                 )
-                    .fallbackToDestructiveMigration() // 2. Added destructive migration
+                    .fallbackToDestructiveMigration()
                     .build()
                 INSTANCE = instance
                 instance

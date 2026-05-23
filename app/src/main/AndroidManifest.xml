@@ -37,6 +37,9 @@
             android:name=".screens.library.LibraryActivity"
             android:exported="false"/>
         <activity
+            android:name=".screens.friends.FriendsActivity"
+            android:exported="false"/>
+        <activity
             android:name=".screens.main.MainActivity"
             android:exported="false"/>
     </application>

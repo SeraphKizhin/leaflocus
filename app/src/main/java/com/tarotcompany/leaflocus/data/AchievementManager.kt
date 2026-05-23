@@ -18,8 +18,8 @@ object AchievementManager {
                     userId = userId,
                     title = title,
                     description = description,
-                    iconResId = 0, // Added this field
-                    earnedDate = System.currentTimeMillis() // Added this field
+                    iconResId = 0,
+                    earnedDate = System.currentTimeMillis()
                 )
                 achievementDao.insertAchievement(newAchievement)
             }

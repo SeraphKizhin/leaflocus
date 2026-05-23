@@ -3,12 +3,9 @@ package com.tarotcompany.leaflocus.data
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "achievements")
-data class Achievement(
+@Entity(tableName = "friendships")
+data class Friendship(
     @PrimaryKey(autoGenerate = true) val id: Int = 0,
     val userId: Int,
-    val title: String,
-    val description: String,
-    val iconResId: Int,
-    val earnedDate: Long
+    val friendId: Int
 )

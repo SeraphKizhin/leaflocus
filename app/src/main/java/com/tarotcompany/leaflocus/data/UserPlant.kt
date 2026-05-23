@@ -17,6 +17,6 @@ data class UserPlant(
     val plantTypeId: Int,
     val customNickname: String,
     val dateAdded: Long,
-    val lastWatered: Long,       // <--- Added the comma here!
+    val lastWatered: Long,
     val isShowcased: Boolean = false
 )

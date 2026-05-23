@@ -21,11 +21,11 @@ class RegisterPresenter(
         view?.showLoading()
 
         scope.launch {
-            val user = User(username = username, email = email, passwordHash = pass)
+            val generatedUid = java.util.UUID.randomUUID().toString().substring(0, 8).uppercase()
+            val user = User(uid = generatedUid, username = username, email = email, passwordHash = pass)
             val userId = withContext(Dispatchers.IO) { userDao.insertUser(user) }
 
             if (userId > 0) {
-                // Award the Welcome achievement
                 AchievementManager.checkAndAward(
                     userId.toInt(),
                     "Welcome to LeafLocus",

@@ -35,7 +35,6 @@ class UserPlantAdapter(
         holder.textNickname.text = plant.customNickname
         holder.textSpecies.text = plant.name
 
-        // Format the timestamp
         val dateString = SimpleDateFormat("MMM dd, hh:mm a", Locale.getDefault()).format(Date(plant.lastWatered))
         holder.textStatus.text = "Last Watered: $dateString\nNeeds: ${plant.waterFrequency}"
 

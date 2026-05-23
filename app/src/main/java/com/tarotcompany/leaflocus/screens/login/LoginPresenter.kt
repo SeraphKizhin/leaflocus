@@ -8,7 +8,7 @@ import kotlinx.coroutines.withContext
 
 class LoginPresenter(
     private var view: LoginContract.View?,
-    private val userDao: UserDao // Inject DAO here
+    private val userDao: UserDao
 ) : LoginContract.Presenter {
 
     private val scope = CoroutineScope(Dispatchers.Main)

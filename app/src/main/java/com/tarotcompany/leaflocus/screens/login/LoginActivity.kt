@@ -42,11 +42,9 @@ class LoginActivity : AppCompatActivity(), LoginContract.View {
     }
 
     override fun showLoading() {
-        // Show progress bar if available
     }
 
     override fun hideLoading() {
-        // Hide progress bar if available
     }
 
     override fun showLoginSuccess() {

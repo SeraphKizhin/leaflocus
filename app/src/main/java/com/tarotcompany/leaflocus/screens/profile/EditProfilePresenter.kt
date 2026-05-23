@@ -14,7 +14,7 @@ class EditProfilePresenter(
 ) : EditProfileContract.Presenter {
 
     private val scope = CoroutineScope(Dispatchers.Main)
-    var currentUserId: Int = -1 // Keep track of the user's ID
+    var currentUserId: Int = -1
 
     override fun loadUserData(username: String) {
         scope.launch {
@@ -32,10 +32,8 @@ class EditProfilePresenter(
     override fun saveChanges(userId: Int, newBio: String, plantStates: Map<Int, Boolean>) {
         scope.launch {
             withContext(Dispatchers.IO) {
-                // 1. Update Bio
                 userDao.updateUserBio(userId, newBio)
 
-                // 2. Update each toggled plant
                 for ((plantId, isShowcased) in plantStates) {
                     plantDao.updateShowcaseStatus(plantId, isShowcased)
                 }

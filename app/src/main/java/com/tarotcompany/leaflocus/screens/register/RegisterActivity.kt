@@ -24,7 +24,7 @@ class RegisterActivity : AppCompatActivity(), RegisterContract.View {
         presenter = RegisterPresenter(
             this,
             database.userDao(),
-            database.achievementDao() // Add this here
+            database.achievementDao()
         )
         val userDao = database.userDao()
 
@@ -60,11 +60,9 @@ class RegisterActivity : AppCompatActivity(), RegisterContract.View {
     }
 
     override fun showLoading() {
-        // Show progress bar
     }
 
     override fun hideLoading() {
-        // Hide progress bar
     }
 
     override fun showRegisterSuccess() {

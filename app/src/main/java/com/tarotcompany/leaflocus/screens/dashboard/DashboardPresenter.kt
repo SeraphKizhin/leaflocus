@@ -27,12 +27,10 @@ class DashboardPresenter(
 
     private fun loadDashboardData() {
         scope.launch {
-            // Get user ID based on username
             val userId = withContext(Dispatchers.IO) { userDao.getUserId(currentUsername) }
 
             if (userId != null) {
                 currentUserId = userId
-                // Fetch their plants
                 val plants = withContext(Dispatchers.IO) { plantDao.getUserPlants(userId) }
                 view?.showUserPlants(plants)
             }
@@ -51,7 +49,6 @@ class DashboardPresenter(
                         currentUserId, "First Hydration", "Watered your plant for the first time!", achievementDao)
                 }
             }
-            // Reload the list to show the updated time
             loadDashboardData()
         }
     }

@@ -11,11 +11,11 @@ import com.tarotcompany.leaflocus.data.UserPlant
 class ShowcaseAdapter(private var plants: List<UserPlant>) : RecyclerView.Adapter<ShowcaseAdapter.ViewHolder>() {
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val nickname: TextView = view.findViewById(R.id.textviewNickname) // Assuming item_user_plant.xml has this
+        val nickname: TextView = view.findViewById(R.id.textviewNickname)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_user_plant, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_showcase_plant, parent, false)
         return ViewHolder(view)
     }
 

@@ -20,16 +20,13 @@ class ProfileActivity : AppCompatActivity(), ProfileContract.View {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile)
 
-        // Initialize Presenter
         val db = AppDatabase.getDatabase(this)
         presenter = ProfilePresenter(this, db.userDao(), db.plantDao(), db.achievementDao())
 
-        // Setup Back Button
         findViewById<TextView>(R.id.textviewBackToDashboard).setOnClickListener {
             presenter.onBackClicked()
         }
 
-        // Setup RecyclerViews
         val showcaseRecycler = findViewById<RecyclerView>(R.id.recyclerViewShowcase)
         showcaseRecycler.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         showcaseAdapter = ShowcaseAdapter(emptyList<UserPlant>())
@@ -40,20 +37,24 @@ class ProfileActivity : AppCompatActivity(), ProfileContract.View {
         achievementAdapter = AchievementAdapter(emptyList<Achievement>())
         achievementRecycler.adapter = achievementAdapter
 
-        findViewById<Button>(R.id.buttonEditProfile).setOnClickListener {
-            // 1. Grab the username explicitly into a variable first
-            val currentUsername = intent.getStringExtra("username") ?: ""
+        val currentUsername = intent.getStringExtra("username") ?: ""
+        val isOwnProfile = intent.getBooleanExtra("isOwnProfile", true)
 
-            // 2. Pass that variable to the new screen
-            val editIntent = android.content.Intent(this, EditProfileActivity::class.java)
-            editIntent.putExtra("username", currentUsername)
-            startActivity(editIntent)
+        val buttonEditProfile = findViewById<Button>(R.id.buttonEditProfile)
+
+        if (!isOwnProfile) {
+            buttonEditProfile.visibility = android.view.View.GONE
+        } else {
+            buttonEditProfile.setOnClickListener {
+                val editIntent = android.content.Intent(this, EditProfileActivity::class.java)
+                editIntent.putExtra("username", currentUsername)
+                startActivity(editIntent)
+            }
         }
     }
 
     override fun onResume() {
         super.onResume()
-        // This runs every time the screen becomes visible (even when returning from the Edit screen)
         val username = intent.getStringExtra("username") ?: ""
         if (username.isNotEmpty()) {
             presenter.fetchProfileData(username)

@@ -16,7 +16,6 @@ class EditProfileActivity : AppCompatActivity(), EditProfileContract.View {
     private lateinit var presenter: EditProfilePresenter
     private lateinit var adapter: ShowcaseSelectionAdapter
 
-    // A map to track which plants the user checked/unchecked during this session
     private val toggledPlants = mutableMapOf<Int, Boolean>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,16 +25,13 @@ class EditProfileActivity : AppCompatActivity(), EditProfileContract.View {
         val db = AppDatabase.getDatabase(this)
         presenter = EditProfilePresenter(this, db.userDao(), db.plantDao())
 
-        // 1. Setup Adapter
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerViewShowcaseSelection)
         recyclerView.layoutManager = LinearLayoutManager(this)
         adapter = ShowcaseSelectionAdapter(emptyList()) { plantId, isChecked ->
-            // Save the user's choice to our map
             toggledPlants[plantId] = isChecked
         }
         recyclerView.adapter = adapter
 
-        // 2. Setup Buttons
         findViewById<TextView>(R.id.textviewCancel).setOnClickListener { closeScreen() }
 
         findViewById<TextView>(R.id.textviewSave).setOnClickListener {
@@ -43,7 +39,6 @@ class EditProfileActivity : AppCompatActivity(), EditProfileContract.View {
             presenter.saveChanges(presenter.currentUserId, newBio, toggledPlants)
         }
 
-        // 3. Load Data
         val username = intent.getStringExtra("username") ?: ""
         presenter.loadUserData(username)
     }
@@ -53,7 +48,6 @@ class EditProfileActivity : AppCompatActivity(), EditProfileContract.View {
     }
 
     override fun showUserPlants(plants: List<UserPlant>) {
-        // This will pop up a message telling us EXACTLY how many plants it found
         Toast.makeText(this, "Debug: Found ${plants.size} plants", Toast.LENGTH_SHORT).show()
 
         adapter.updateData(plants)

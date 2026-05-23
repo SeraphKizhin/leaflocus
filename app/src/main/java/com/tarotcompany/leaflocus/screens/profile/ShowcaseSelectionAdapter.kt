@@ -11,7 +11,6 @@ import com.tarotcompany.leaflocus.data.UserPlant
 
 class ShowcaseSelectionAdapter(
     private var plants: List<UserPlant>,
-    // A callback function to let the Activity know when a checkbox is clicked
     private val onPlantToggled: (Int, Boolean) -> Unit
 ) : RecyclerView.Adapter<ShowcaseSelectionAdapter.ViewHolder>() {
 
@@ -29,11 +28,9 @@ class ShowcaseSelectionAdapter(
         val plant = plants[position]
         holder.plantName.text = plant.customNickname
 
-        // Remove listener temporarily so RecyclerView doesn't trigger false clicks when scrolling
         holder.checkbox.setOnCheckedChangeListener(null)
         holder.checkbox.isChecked = plant.isShowcased
 
-        // Re-attach listener
         holder.checkbox.setOnCheckedChangeListener { _, isChecked ->
             onPlantToggled(plant.id, isChecked)
         }

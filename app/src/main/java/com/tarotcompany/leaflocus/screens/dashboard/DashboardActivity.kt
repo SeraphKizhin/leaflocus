@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.tarotcompany.leaflocus.R
 import com.tarotcompany.leaflocus.data.AppDatabase
 import com.tarotcompany.leaflocus.data.UserPlantDetails
+import com.tarotcompany.leaflocus.screens.friends.FriendsActivity
 import com.tarotcompany.leaflocus.screens.library.LibraryActivity
 import com.tarotcompany.leaflocus.screens.login.LoginActivity
 import com.tarotcompany.leaflocus.screens.profile.ProfileActivity
@@ -32,7 +33,6 @@ class DashboardActivity : AppCompatActivity(), DashboardContract.View {
             database.achievementDao()
         )
 
-        // Setup RecyclerView
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerViewMyPlants)
         recyclerView.layoutManager = LinearLayoutManager(this)
         plantAdapter = UserPlantAdapter(emptyList()) { plantId ->
@@ -40,18 +40,23 @@ class DashboardActivity : AppCompatActivity(), DashboardContract.View {
         }
         recyclerView.adapter = plantAdapter
 
-        // Click Listeners
         findViewById<Button>(R.id.buttonProfile).setOnClickListener { presenter.onProfileClicked() }
         findViewById<Button>(R.id.buttonLogout).setOnClickListener { presenter.onLogoutClicked() }
-        findViewById<ImageView>(R.id.imageButtonLibrary).setOnClickListener { presenter.onLibraryClicked() }
+        findViewById<Button>(R.id.buttonLibrary).setOnClickListener { presenter.onLibraryClicked() }
 
-        // Initialize with passed username
         val username = intent.getStringExtra("username") ?: ""
         findViewById<TextView>(R.id.textviewWelcome).text = "Welcome, $username!"
         presenter.initialize(username)
+
+        findViewById<Button>(R.id.buttonFriends).setOnClickListener {
+            val currentUsername = intent.getStringExtra("username") ?: ""
+
+            val intent = android.content.Intent(this, FriendsActivity::class.java)
+            intent.putExtra("username", currentUsername)
+            startActivity(intent)
+        }
     }
 
-    // Refresh data when returning from the Library
     override fun onResume() {
         super.onResume()
         val username = intent.getStringExtra("username") ?: ""

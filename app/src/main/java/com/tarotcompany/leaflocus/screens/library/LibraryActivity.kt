@@ -46,7 +46,6 @@ class LibraryActivity : AppCompatActivity(), LibraryContract.View {
         }
         recyclerView.adapter = plantAdapter
 
-        // FIXED: Using lifecycleScope instead of 'scope'
         lifecycleScope.launch {
             val plantDao = database.plantDao()
             val existingPlants = plantDao.getAllPlantTypes()
