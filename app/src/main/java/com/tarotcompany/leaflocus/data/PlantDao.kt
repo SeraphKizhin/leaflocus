@@ -17,12 +17,16 @@ interface PlantDao {
     @Insert
     suspend fun addPlantToUserCollection(userPlant: UserPlant): Long
 
+    // Fixed to match UserPlantDetails exactly!
     @Query("""
-        SELECT pt.*, up.customNickname, up.lastWatered 
+        SELECT up.id AS plantId, pt.name, up.customNickname, up.lastWatered, pt.waterFrequency 
         FROM user_plants up 
         INNER JOIN plant_types pt ON up.plantTypeId = pt.id 
         WHERE up.userId = :userId
     """)
     suspend fun getUserPlants(userId: Int): List<UserPlantDetails>
-    // Note: You would create a small 'UserPlantDetails' data class to hold this combined data
+
+    // Added the missing update function with the : Int fix for the signature V error!
+    @Query("UPDATE user_plants SET lastWatered = :currentTime WHERE id = :plantId")
+    suspend fun updateWateringTime(plantId: Int, currentTime: Long): Int
 }

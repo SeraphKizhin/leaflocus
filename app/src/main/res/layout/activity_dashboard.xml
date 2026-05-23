@@ -1,69 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp">
+    android:background="@color/white"
+    android:orientation="vertical">
 
     <LinearLayout
-        android:id="@+id/headerContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/dashboard_header"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
         android:padding="16dp">
 
         <TextView
             android:id="@+id/textviewWelcome"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Welcome!"
-            android:textSize="20sp" />
+            android:layout_weight="1"
+            android:text="My Locus"
+            android:textColor="@color/black"
+            android:textSize="22sp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/imageButtonLibrary"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:focusable="true"
+            android:src="@android:drawable/ic_menu_agenda"
+            android:contentDescription="Library"
+            app:tint="@color/leaf_dark" />
     </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewMyPlants"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:padding="8dp"
+        android:clipToPadding="false" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:orientation="horizontal">
+        android:background="@color/dashboard_panel"
+        android:orientation="horizontal"
+        android:padding="12dp">
 
-        <LinearLayout
+        <Button
             android:id="@+id/buttonProfile"
             android:layout_width="0dp"
-            android:layout_height="150dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_marginEnd="8dp"
-            android:background="@color/dashboard_panel"
-            android:gravity="center"
-            android:clickable="true"
-            android:focusable="true">
+            android:backgroundTint="@color/leaf_primary"
+            android:text="Profile" />
 
-            <TextView
-                android:id="@+id/textviewProfile"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Go to Profile"
-                android:textStyle="bold" />
-        </LinearLayout>
-
-        <LinearLayout
+        <Button
             android:id="@+id/buttonLogout"
             android:layout_width="0dp"
-            android:layout_height="150dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_marginStart="8dp"
-            android:background="@color/dashboard_panel"
-            android:gravity="center"
-            android:clickable="true"
-            android:focusable="true">
-
-            <TextView
-                android:id="@+id/textviewLogoutLink"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Logout"
-                android:textStyle="bold" />
-        </LinearLayout>
-
+            android:backgroundTint="#8A8A8A"
+            android:text="Logout" />
     </LinearLayout>
-
 </LinearLayout>
