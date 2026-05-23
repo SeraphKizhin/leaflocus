@@ -22,4 +22,7 @@ interface UserDao {
     // Added this helper so the Dashboard knows which user is logged in!
     @Query("SELECT id FROM users WHERE username = :username LIMIT 1")
     suspend fun getUserId(username: String): Int?
+
+    @Query("UPDATE users SET bio = :newBio WHERE id = :userId")
+    suspend fun updateUserBio(userId: Int, newBio: String): Int
 }

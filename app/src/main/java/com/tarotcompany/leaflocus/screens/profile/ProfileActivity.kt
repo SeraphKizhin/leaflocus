@@ -1,6 +1,7 @@
 package com.tarotcompany.leaflocus.screens.profile
 
 import android.os.Bundle
+import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -39,9 +40,24 @@ class ProfileActivity : AppCompatActivity(), ProfileContract.View {
         achievementAdapter = AchievementAdapter(emptyList<Achievement>())
         achievementRecycler.adapter = achievementAdapter
 
-        // Fetch Data
+        findViewById<Button>(R.id.buttonEditProfile).setOnClickListener {
+            // 1. Grab the username explicitly into a variable first
+            val currentUsername = intent.getStringExtra("username") ?: ""
+
+            // 2. Pass that variable to the new screen
+            val editIntent = android.content.Intent(this, EditProfileActivity::class.java)
+            editIntent.putExtra("username", currentUsername)
+            startActivity(editIntent)
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        // This runs every time the screen becomes visible (even when returning from the Edit screen)
         val username = intent.getStringExtra("username") ?: ""
-        presenter.fetchProfileData(username)
+        if (username.isNotEmpty()) {
+            presenter.fetchProfileData(username)
+        }
     }
 
     override fun showProfile(user: User, showcased: List<UserPlant>, achievements: List<Achievement>) {

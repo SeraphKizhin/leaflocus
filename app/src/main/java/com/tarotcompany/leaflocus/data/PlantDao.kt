@@ -35,4 +35,10 @@ interface PlantDao {
 
     @Query("SELECT COUNT(*) FROM user_plants WHERE userId = :userId")
     suspend fun getPlantCount(userId: Int): Int
+
+    @Query("UPDATE user_plants SET isShowcased = :isShown WHERE id = :plantId")
+    suspend fun updateShowcaseStatus(plantId: Int, isShown: Boolean): Int
+
+    @Query("SELECT * FROM user_plants WHERE userId = :userId")
+    suspend fun getAllRawUserPlants(userId: Int): List<UserPlant>
 }
