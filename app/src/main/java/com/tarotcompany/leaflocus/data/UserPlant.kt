@@ -15,7 +15,8 @@ data class UserPlant(
     @PrimaryKey(autoGenerate = true) val id: Int = 0,
     val userId: Int,
     val plantTypeId: Int,
-    val customNickname: String, // E.g., "Spike" the Dragonfruit
-    val dateAdded: Long,        // Timestamp
-    val lastWatered: Long       // Timestamp to calculate when next to water
+    val customNickname: String,
+    val dateAdded: Long,
+    val lastWatered: Long,       // <--- Added the comma here!
+    val isShowcased: Boolean = false
 )

@@ -8,5 +8,8 @@ data class User(
     @PrimaryKey(autoGenerate = true) val id: Int = 0,
     val username: String,
     val email: String,
-    val passwordHash: String // In a real app, hash this! We'll keep it simple for now.
+    val passwordHash: String,
+    val bio: String = "Welcome to my Locus!",
+    val level: Int = 1,
+    val experience: Int = 0
 )

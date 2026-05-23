@@ -29,4 +29,7 @@ interface PlantDao {
     // Added the missing update function with the : Int fix for the signature V error!
     @Query("UPDATE user_plants SET lastWatered = :currentTime WHERE id = :plantId")
     suspend fun updateWateringTime(plantId: Int, currentTime: Long): Int
+
+    @Query("SELECT * FROM user_plants WHERE userId = :userId AND isShowcased = 1")
+    suspend fun getShowcasedPlants(userId: Int): List<UserPlant>
 }

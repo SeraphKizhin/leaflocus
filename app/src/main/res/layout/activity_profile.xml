@@ -1,74 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/white"
-    android:padding="16dp">
+    android:fillViewport="true"
+    android:background="@color/white">
 
     <LinearLayout
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:layout_marginLeft="80dp">
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/default_profile"/>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="75dp"
-        android:layout_marginTop="25dp"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/textviewUsernameLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Username: Seraph" />
-
-        <TextView
-            android:id="@+id/textviewFirstNameLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="First Name: Kenji" />
-
-        <TextView
-            android:id="@+id/textviewMiddleNameLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Middle Name: Mondoc" />
-
-        <TextView
-            android:id="@+id/textviewLastNameLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Last Name: Ludivese" />
-
-        <TextView
-            android:id="@+id/textviewEmail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@+id/textviewEmail" />
+        android:orientation="vertical"
+        android:padding="16dp">
 
         <TextView
             android:id="@+id/textviewBackToDashboard"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Back to Dashboard"
-            android:textColor="#135A2F"
-            android:textSize="15sp"
+            android:text="← Back"
+            android:padding="8dp"
+            android:textColor="@color/black" />
+
+        <ImageView
+            android:id="@+id/imageProfile"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_gravity="center"
+            android:src="@drawable/default_profile" />
+
+        <TextView
+            android:id="@+id/textviewUsername"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Username"
+            android:gravity="center"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textviewLevel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Level 1"
+            android:gravity="center"
+            android:textColor="@color/leaf_primary" />
+
+        <TextView
+            android:id="@+id/textviewBio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Welcome to my Locus!"
+            android:padding="16dp"
+            android:background="@color/dashboard_panel"
+            android:layout_marginTop="16dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Plant Showcase"
             android:textStyle="bold"
-            android:clickable="true"
-            android:focusable="true"
-            android:layout_marginTop="30dp" />
+            android:layout_marginTop="16dp" />
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewShowcase"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:layout_marginTop="8dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Achievements"
+            android:textStyle="bold"
+            android:layout_marginTop="16dp" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewAchievements"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp" />
     </LinearLayout>
-
-
-
-</LinearLayout>
+</ScrollView>

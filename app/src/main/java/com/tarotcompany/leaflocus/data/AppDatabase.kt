@@ -5,11 +5,19 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 
-@Database(entities = [User::class, PlantType::class, UserPlant::class], version = 2, exportSchema = false)
+@Database(
+    entities = [
+        User::class,
+        PlantType::class,
+        UserPlant::class,
+        Achievement::class // Ensure Achievement is here
+    ],
+    version = 3 // Bumped from 2 to 3
+)
 abstract class AppDatabase : RoomDatabase() {
-
     abstract fun userDao(): UserDao
     abstract fun plantDao(): PlantDao
+    abstract fun achievementDao(): AchievementDao
 
     companion object {
         @Volatile
