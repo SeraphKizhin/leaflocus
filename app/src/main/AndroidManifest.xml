@@ -15,7 +15,6 @@
         <activity
             android:name=".screens.register.RegisterActivity"
             android:exported="false"/>
-
         <activity
             android:name=".screens.login.LoginActivity"
             android:exported="true">
@@ -30,6 +29,9 @@
             android:exported="false"/>
         <activity
             android:name=".screens.profile.ProfileActivity"
+            android:exported="false"/>
+        <activity
+            android:name=".screens.library.LibraryActivity"
             android:exported="false"/>
         <activity
             android:name=".screens.main.MainActivity"

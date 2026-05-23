@@ -3,65 +3,67 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="20dp">
+    android:padding="16dp">
 
     <LinearLayout
-        android:layout_width="350dp"
-        android:layout_height="50dp"
-        android:background="#E6607076">
+        android:id="@+id/headerContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/dashboard_header"
+        android:padding="16dp">
 
         <TextView
             android:id="@+id/textviewWelcome"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:padding="10dp"
-            android:text="@+id/textviewWelcome" />
-
+            android:text="Welcome!"
+            android:textSize="20sp" />
     </LinearLayout>
+
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:orientation="horizontal">
 
         <LinearLayout
-            android:layout_width="200dp"
-            android:layout_height="1000dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginRight="5dp"
-            android:background="#D7EBEFF1">
+            android:id="@+id/buttonProfile"
+            android:layout_width="0dp"
+            android:layout_height="150dp"
+            android:layout_weight="1"
+            android:layout_marginEnd="8dp"
+            android:background="@color/dashboard_panel"
+            android:gravity="center"
+            android:clickable="true"
+            android:focusable="true">
 
             <TextView
                 android:id="@+id/textviewProfile"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Go to Profile"
-                android:layout_marginLeft="50dp"
-                android:clickable="true"
-                android:focusable="true"
-                android:layout_marginTop="20dp" />
+                android:textStyle="bold" />
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="145dp"
-            android:layout_height="400dp"
-            android:layout_marginTop="5dp"
-            android:background="#D7EBEFF1">
+            android:id="@+id/buttonLogout"
+            android:layout_width="0dp"
+            android:layout_height="150dp"
+            android:layout_weight="1"
+            android:layout_marginStart="8dp"
+            android:background="@color/dashboard_panel"
+            android:gravity="center"
+            android:clickable="true"
+            android:focusable="true">
 
             <TextView
                 android:id="@+id/textviewLogoutLink"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Logout"
-                android:layout_marginLeft="50dp"
-                android:clickable="true"
-                android:focusable="true"
-                android:layout_marginTop="10dp" />
+                android:textStyle="bold" />
         </LinearLayout>
 
     </LinearLayout>
-
-
-
 
 </LinearLayout>

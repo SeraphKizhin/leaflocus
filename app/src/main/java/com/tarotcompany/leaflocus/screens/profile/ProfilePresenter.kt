@@ -1,21 +1,36 @@
 package com.tarotcompany.leaflocus.screens.profile
 
-class ProfilePresenter(private var view: ProfileContract.View?) : ProfileContract.Presenter {
+import com.tarotcompany.leaflocus.data.UserDao
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
-    override fun fetchProfileData() {
-        // Logic happens here (e.g., getting data from a Repository or Firebase)
-        val email = "user@example.com"
-        val joinDate = "January 2024"
+class ProfilePresenter(
+    private var view: ProfileContract.View?,
+    private val userDao: UserDao
+) : ProfileContract.Presenter {
 
-        // Tell the view what to show
-        view?.showUserDetails(email, joinDate)
+    private val scope = CoroutineScope(Dispatchers.Main)
+
+    override fun fetchProfileData(username: String) {
+        scope.launch {
+            // Fetch user from Room on a background thread
+            val user = withContext(Dispatchers.IO) {
+                userDao.getUserByUsername(username)
+            }
+
+            // If user is found, update the View on the main thread
+            if (user != null) {
+                view?.showUserDetails(user.username, user.email)
+            }
+        }
     }
 
     override fun onBackClicked() {
         view?.navigateBack()
     }
 
-    // Add a way to clean up reference
     fun detachView() {
         view = null
     }

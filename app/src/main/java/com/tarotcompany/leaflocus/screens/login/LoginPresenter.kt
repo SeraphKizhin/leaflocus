@@ -1,21 +1,34 @@
 package com.tarotcompany.leaflocus.screens.login
 
-class LoginPresenter(private var view: LoginContract.View?) : LoginContract.Presenter {
+import com.tarotcompany.leaflocus.data.UserDao
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+
+class LoginPresenter(
+    private var view: LoginContract.View?,
+    private val userDao: UserDao // Inject DAO here
+) : LoginContract.Presenter {
+
+    private val scope = CoroutineScope(Dispatchers.Main)
 
     override fun login(username: String, password: String) {
         view?.showLoading()
-        // Logic to communicate with Model/Repository goes here
-        // For now, let's just simulate a success
-        if (username.isNotEmpty() && password.isNotEmpty()) {
+
+        scope.launch {
+            val user = withContext(Dispatchers.IO) {
+                userDao.authenticateUser(username, password)
+            }
+
             view?.hideLoading()
-            view?.showLoginSuccess()
-        } else {
-            view?.hideLoading()
-            view?.showLoginError()
+            if (user != null) {
+                view?.showLoginSuccess()
+            } else {
+                view?.showLoginError()
+            }
         }
     }
 
-    override fun onDestroy() {
-        view = null // Prevent memory leaks
-    }
+    override fun onDestroy() { view = null }
 }

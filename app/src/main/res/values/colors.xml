@@ -2,4 +2,11 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <color name="leaf_primary">#03A141</color>
+    <color name="leaf_dark">#135A2F</color>
+    <color name="leaf_background">#F4F2F2</color>
+
+    <color name="dashboard_header">#E6607076</color>
+    <color name="dashboard_panel">#D7EBEFF1</color>
 </resources>

@@ -8,7 +8,9 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.tarotcompany.leaflocus.R
+import com.tarotcompany.leaflocus.data.AppDatabase
 import com.tarotcompany.leaflocus.screens.login.LoginActivity
+import com.tarotcompany.leaflocus.screens.login.LoginPresenter
 
 class RegisterActivity : AppCompatActivity(), RegisterContract.View {
 
@@ -18,7 +20,10 @@ class RegisterActivity : AppCompatActivity(), RegisterContract.View {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
 
-        presenter = RegisterPresenter(this)
+        val database = AppDatabase.getDatabase(applicationContext)
+        val userDao = database.userDao()
+
+        presenter = RegisterPresenter(this, userDao)
 
         val edittextUsername = findViewById<EditText>(R.id.edittextUsername)
         val edittextEmail = findViewById<EditText>(R.id.edittextEmail)

@@ -37,7 +37,9 @@ class DashboardActivity : AppCompatActivity(), DashboardContract.View {
     }
 
     override fun navigateToProfile() {
+        val currentUsername = intent.getStringExtra("username")
         val intent = Intent(this, ProfileActivity::class.java)
+        intent.putExtra("username", currentUsername)
         startActivity(intent)
     }
 
